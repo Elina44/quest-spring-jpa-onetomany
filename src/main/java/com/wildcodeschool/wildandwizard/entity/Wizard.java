@@ -1,9 +1,13 @@
 package com.wildcodeschool.wildandwizard.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 import java.sql.Date;
 
 @Entity
@@ -18,6 +22,11 @@ public class Wizard {
     private String birthPlace;
     private String biography;
     private boolean muggle;
+
+    //Création de la clé étrangère
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="school_id")
+    private School school;
 
     public Wizard() {
     }
@@ -76,5 +85,13 @@ public class Wizard {
 
     public void setMuggle(boolean muggle) {
         this.muggle = muggle;
+    }
+//getter suite à la mise en place de la clé étrangère :
+    public School getSchool() {
+        return school;
+    }
+//setter suite à la mise en place de la clé étrangère :
+    public void setSchool(School school) {
+        this.school = school;
     }
 }
